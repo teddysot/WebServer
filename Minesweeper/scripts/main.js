@@ -3,10 +3,16 @@ const $board = $('#board');
 const $easy = $('#easy');
 const $medium = $('#medium');
 const $hard = $('#hard');
+$rows = 10;
+$cols = 10;
 
 // Generate Board
-function createBoard(rows, cols)
+function createBoard()
 {
+    // Generate Field
+    let container = document.getElementById("board");
+    container.innerHTML ="";
+    container.innerHTML ="<h2>Board</h2>";
     for(let i = 0; i < rows; i++)
     {
         const $row = $('<div>').addClass('row');
@@ -18,13 +24,30 @@ function createBoard(rows, cols)
         }
         $board.append($row);
     }
+
+    // Reset Button
+    var btn = document.createElement("BUTTON");    
+    var t = document.createTextNode("RESET");   
+    btn.appendChild(t);                         
+    document.body.appendChild(btn);                  
+    
+    btn.onclick = function()
+    {
+        resetBoard();
+    }
+}
+
+// Reset board
+function resetBoard()
+{
+    createBoard();
 }
 
 // Difficulty Selection
 function difficulty(choice)
 {
-    let rows = 0;
-    let cols = 0;
+    let container = document.getElementById("start-menu");
+    container.innerHTML ="";
 
     if(choice == 1)
     {
@@ -41,7 +64,7 @@ function difficulty(choice)
         rows = 30;
         cols = 30;
     }
-    createBoard(rows, cols)
+    createBoard();
 }
 
 // On click events
