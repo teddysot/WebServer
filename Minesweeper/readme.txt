@@ -1,10 +1,10 @@
-###**PG08 T1 A1: Bio Web Page**
+###**PG15 T1 A2: Minesweeper Web App**
 Submitted by: <pg15teddy> Teddy Nasahachart
 Date: <date submitted>
 Version: [if applicable]
 ----------
 < Description of what my project does - edit and replace this line >
-[demo] http://dev.pgwm.vfs.local/~pg15teddy/bio/index.html
+[demo] http://dev.pgwm.vfs.local/~pg15teddy/Minesweeper/index.html
 
 ####**Download/Install**
 ---------
@@ -15,4 +15,4 @@ Version: [if applicable]
 
 ####**How to use**
 --------
-In this web page show the use of flex box in html5 and css by creating my bio
+In this web app, it is a basic of Minesweeper game app.

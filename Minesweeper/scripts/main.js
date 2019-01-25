@@ -4,6 +4,7 @@ const $easy = $('#easy');
 const $medium = $('#medium');
 const $hard = $('#hard');
 
+// Generate Board
 function createBoard(rows, cols)
 {
     for(let i = 0; i < rows; i++)
@@ -19,6 +20,7 @@ function createBoard(rows, cols)
     }
 }
 
+// Difficulty Selection
 function difficulty(choice)
 {
     let rows = 0;
@@ -42,6 +44,7 @@ function difficulty(choice)
     createBoard(rows, cols)
 }
 
+// On click events
 $easy.on('click', function()
 {
     difficulty(1);
