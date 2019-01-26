@@ -5,13 +5,6 @@ Template App
 'use strict';
 
 // JavaScript goes here...
-let a = 6; // a number
-a += 5;
 
-let  title = "Hello";
-title += " World";
-
-console.log("Message: " + title);
-
-let el = document.querySelector('#element-id');
-el.innerHTML = title;
+const app = new App();
+app.return;

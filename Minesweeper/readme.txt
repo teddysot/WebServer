@@ -1,6 +1,6 @@
 ###**PG15 T1 A2: Minesweeper Web App**
 Submitted by: <pg15teddy> Teddy Nasahachart
-Date: <date submitted>
+Date: Jan 25, 2019
 Version: [if applicable]
 ----------
 < Description of what my project does - edit and replace this line >

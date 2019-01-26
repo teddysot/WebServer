@@ -1,89 +1,96 @@
-const $board = $('#board');
 
-const $easy = $('#easy');
-const $medium = $('#medium');
-const $hard = $('#hard');
-$rows = 10;
-$cols = 10;
-
-// Generate Board
-function createBoard()
+class App
 {
-    // Generate Field
-    let container = document.getElementById("board");
-    container.innerHTML ="";
-    container.innerHTML ="<h2>Board</h2>";
-    for(let i = 0; i < rows; i++)
+    constructor()
     {
-        const $row = $('<div>').addClass('row');
-        for(let j = 0; j < cols; j++)
+        // Initialize declaration of board
+        this.board =  document.querySelector('#board');
+        this.rows = 10;
+        this.cols = 10;
+
+        /*document.querySelector('.col hidden')
+        .addEventListener('click', event => 
         {
-            const $col = $('<div>')
-            .addClass('col hidden');
-            $row.append($col);
+            console.log('col hiddden clicked');
+            
+        });*/
+
+        // Difficulty Selection
+        document.querySelector('#easy-menu')
+        .addEventListener('click', event => 
+        {
+            this.difficulty(1);
+        });
+
+        document.querySelector('#medium-menu')
+        .addEventListener('click', event => 
+        {
+            this.difficulty(2);
+        });
+        document.querySelector('#hard-menu')
+        .addEventListener('click', event => 
+        {
+            this.difficulty(3);
+        });
+    }
+    // Generate Board
+    createBoard()
+    {
+        // Generate Field
+        let container = document.getElementById("board");
+        container.innerHTML ="";
+        container.innerHTML ="<h2>Board</h2>";
+        for(let i = 0; i < this.rows; i++)
+        {
+            const $row = document.createElement(`div`);
+            $row.className = `row`; 
+            for(let j = 0; j < this.cols; j++)
+            {
+                const $col = document.createElement(`div`);
+                $col.id = `c${i}-${j}`;
+                $col.className = `col hidden`;
+                $row.append($col);
+            }
+            this.board.append($row);
         }
-        $board.append($row);
+
+        // Reset Button
+        var btn = document.createElement(`button`);        // Create a <button> element
+        var t = document.createTextNode("RESET");       // Create a text node
+        btn.onmouseup = `resetBoard()`;
+        btn.appendChild(t);                                // Append the text to <button>
+        document.body.appendChild(btn);                    // Append <button> to <body>
     }
 
-    // Reset Button
-    var btn = document.createElement("BUTTON");    
-    var t = document.createTextNode("RESET");   
-    btn.appendChild(t);                         
-    document.body.appendChild(btn);                  
-    
-    btn.onclick = function()
+    // Reset board
+    resetBoard()
     {
-        resetBoard();
+        this.createBoard();
+    }
+
+    // Difficulty Selection
+    difficulty(choice)
+    {
+        let container = document.getElementById("start-menu");
+        container.innerHTML ="";
+
+        if(choice == 1)
+        {
+            this.rows = 10;
+            this.cols = 10;
+        }
+        else if(choice == 2)
+        {
+            this.rows = 20;
+            this.cols = 20;
+        }
+        else if(choice == 3)
+        {
+            this.rows = 30;
+            this.cols = 30;
+        }
+        this.createBoard();
     }
 }
 
-// Reset board
-function resetBoard()
-{
-    createBoard();
-}
-
-// Difficulty Selection
-function difficulty(choice)
-{
-    let container = document.getElementById("start-menu");
-    container.innerHTML ="";
-
-    if(choice == 1)
-    {
-        rows = 10;
-        cols = 10;
-    }
-    else if(choice == 2)
-    {
-        rows = 20;
-        cols = 20;
-    }
-    else if(choice == 3)
-    {
-        rows = 30;
-        cols = 30;
-    }
-    createBoard();
-}
-
-// On click events
-$easy.on('click', function()
-{
-    difficulty(1);
-})
-
-$medium.on('click', function()
-{
-    difficulty(2);
-})
-
-$hard.on('click', function()
-{
-    difficulty(3);
-})
-
-$board.on('click', '.col.hidden', function()
-{
-    console.log($(this));
-})
+let app = new App();
