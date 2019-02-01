@@ -37,7 +37,7 @@ class App
     createBoard()
     {
         // Generate Field
-        let container = document.getElementById("board");
+        let container = document.querySelector("#board");
         container.innerHTML ="";
         container.innerHTML ="<h2>Board</h2>";
         for(let i = 0; i < this.rows; i++)
@@ -71,7 +71,7 @@ class App
     // Difficulty Selection
     difficulty(choice)
     {
-        let container = document.getElementById("start-menu");
+        let container = document.querySelector("#start-menu");
         container.innerHTML ="";
 
         if(choice == 1)
