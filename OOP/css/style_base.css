@@ -1,0 +1,23 @@
+/* (C) Copyright 2019 Scott Henshaw */
+
+body{
+    margin: 0;
+    font-size: 18px;
+    background-color: #d6d6d6;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div{
+    display: inline-block;
+}
+
+.hidden{
+    display: none;
+}
+
+#header{
+    text-align: center;
+    width: 100%;
+    background-color: #d6d6d6;
+    font-size: 14px
+}

@@ -1,0 +1,19 @@
+.screen{
+    width: 80%;
+    height: 500px;
+}
+
+.bevel{
+    border-top: 3px solid lightgrey;
+    border-left: 3px solid lightgrey;
+    border-right: 3px solid lightgrey;
+    border-bottom: 3px solid lightgrey;
+}
+
+.face-plate{
+    width: 64px;
+    height: 64px;
+    background-color: #ff3b3b;
+    color: rgb(96, 255, 117);
+    background-image: url("../images/faceplate.png");
+}
