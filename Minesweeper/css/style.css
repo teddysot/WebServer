@@ -8,13 +8,19 @@ body
 Tip: In order to prevent inline-block for wrapping use 'white-space : nowrap'
 https://stackoverflow.com/questions/14440276/prevent-inline-block-divs-from-wrapping
 */
-#board
-{
-    display: block;
-    white-space : nowrap;
-    overflow: hidden;
+
+#board-container{
+    display: flex;
+    flex-direction: column;
     margin: 0 auto;
     width: 100%;
+    justify-content: center;
+}
+
+#board
+{
+    margin: 0 auto;
+    align-content: center;
 }
 
 #start-menu
@@ -23,31 +29,53 @@ https://stackoverflow.com/questions/14440276/prevent-inline-block-divs-from-wrap
     width: 500px;
 }
 
-.row
+.cell
 {
-    font-size: 0px;
-}
-
-.col
-{
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 1px solid white;
-}
-
-.col.hidden
-{
+    width: 40px;
+    height: 40px;
     background-color: #333;
-    cursor: pointer;
+    border-bottom: solid 2px black;
+    border-right: solid 2px black;
 }
 
-.col.hidden:hover
+.cell:hover
 {
-    background-color: white
+    background-color: #555;
+    cursor: pointer;
+    border-bottom: solid 2px black;
+    border-right: solid 2px black;
 }
 
-nav{
+.cellClicked
+{
+    width: 40px;
+    height: 40px;
+    background-color: rgb(133, 133, 133);
+    border-top: solid 2px black;
+    border-left: solid 2px black;
+    border-bottom: none;
+    border-right: none;
+}
+
+.flag
+{
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    border-bottom: solid 2px black;
+    border-right: solid 2px black;
+    background-size: 40px 40px;
+    background-image: url("../images/faceplate.png");
+}
+
+.bomb
+{
+    background-size: 40px 40px;
+    background-image: url("../images/facebomb.png");
+}
+
+nav
+{
     background: #333;
 }
 

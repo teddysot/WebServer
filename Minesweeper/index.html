@@ -8,6 +8,7 @@
         <title>Minesweeper by Teddy</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <!-- Include jQuery -->
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     </head>
     <body>
         <h1>MINESWEEPER</h1>
@@ -23,7 +24,11 @@
                 </nav>
         </div>
         <!-- Generate Board -->
-        <div id="board"></div>
-        <script src="./scripts/main.js"></script>
+        <div id=board-container>
+            <div id="mine-count"></div>
+            <div id="timer"></div>
+            <div id="board"></div>
+        </div>
+        <script type="module" src="./scripts/main.js"></script>
     </body>
 </html>
