@@ -1,0 +1,53 @@
+/* Copyright 2019 Scott Henshaw */
+*{
+    font-size: 16px;
+    font-family: ComicSans, Helvetica, Arial;
+    font-weight: 200;
+}
+
+.hide {display: none;}
+
+.debug {border: 2px dashed red;}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.flex-item {
+    flex: 1 1 auto;
+}
+
+.flex-center-item {
+    flex-grow: 4 1 auto;
+}
+
+.align-self-center {
+    align-self: center;
+}
+
+.align-text-center {
+    text-align: center;
+}
+
+.button {
+    display: inline-block;
+    background: lightgrey;
+    border-top: 3px solid lightgrey;
+    border-left: 3px solid lightgrey;
+    border-bottom: 3px solid darkslategrey;
+    border-right: 3px solid darkslategrey;
+    padding: .5em 1em .5em 1em;
+    font-weight: 700;
+    margin: .5em;
+    cursor: pointer;
+}

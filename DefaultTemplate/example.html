@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title></title>
+        <link rel='stylesheet' type="text/css" href='css/styles.css'>
+        <style>
+            /* css */
+                * {
+                    background: gray;
+                }
+                div {
+                    color: darkblue;
+                    background: gainsboro;
+                }
+                .screen {
+                    width: 1200px;
+                    height: 600px;
+                }
+                .square {
+                    --square-size: 32px;
+                    width: var(--square-size);
+                    height: var(--square-size);
+                }
+                #result-wrapper {
+                    width: 1250px;
+                }
+        </style>
+        <scripts>
+            <!-- Load libraries --> 
+        </scripts>
+    </head>
+    <body>
+        <!-- All the stuff we see -->
+        <section id="results-screen">
+            <div id="results-wrapper" class="screen">
+                <!-- All done --> 
+            </div>
+        </section>
+
+        <section id="game-screen">
+            <div id="game-wrapper" class="screen">
+                <!-- Dynamic content --> 
+                <!-- Sample
+                    <table>
+                        <tr>
+                            <td data-row="0" data-col="0" class="square"></td>
+                            <td data-row="0" data-col="1" class="square"></td>...
+                        </tr>
+                    </table>
+                -->
+            </div>
+        </section>
+        <section id="splash-screen">
+            <div id="splash-wrapper" class="screen">
+                <div class="button"><button id="play-now">Play</button></div>
+            </div>
+        </section>
+
+        <script type="module" src="scripts/main.js"></script>
+        <script>
+            // Variables
+            const a = "The Answer is";
+            var b = 42;
+            let c = 3;
+
+            // Arrays
+            let e = [];
+            let e2 = new Array();
+            let e3 = new Array( 20 );
+
+            e2.push(c);
+
+            let f = e3.length;
+
+            const FRUIT_TYPE = {
+                UNKNOWN: 0,
+                ORANGE:  1,
+                APPLE:   2
+            }
+
+            class Fruit{
+                constructor( type = FRUIT_TYPE.UNKNOWN ) {
+                    let xx= junk;
+                    this.type = type;
+                    this.attr1 = "Hello";
+                    this.attr2 = "World";
+                    this.attr3 = 123;
+                }
+
+                init (param1 = "Hello", param2) {
+                    // do something
+                    if(param2 == undefined) {
+                        var p2 = this.attr2;
+                    }
+                    this.attr1 = this.attr1 + " " + this.attr2;
+                }
+            }
+
+            let f1 = new Fruit();
+            f1.init();
+
+            class Apple extends Fruit {
+                constructor( seeds = 5 ) {
+                    super( FRUIT_TYPE.APPLE );
+                    this._private_ = {
+                        seeds: seeds
+                    }
+                }
+
+                get seeds() { return this._private_.seeds }
+                set seeds( val ) {
+                    if(val > 0)
+                        this._private_.seeds = val;
+                }
+            }
+
+            let seedCount = 20;
+            let anApple = new Apple( seedCount );
+            anApple.seeds = 32;
+            console.log( anApple.attr1 + anApple.attr2 + " has " + anApple.seeds );
+
+            document.querySelector(`#play-now`)
+                .addEventListener(`click`, event => {
+                    alert(`wow!`);
+                });
+
+            // JQuery
+            $('#play-now').on('click', event => {
+                alert("wow!");
+            });
+
+            let $sections = $('section');
+            $sections.hide();
+
+            $('#game-wrapper').html(`<div id="nothing">${anApple.attr1}</div>`)
+            .append(`<br />`)
+            .append(`<script> class Game{} let game = new Game();</script>`);
+
+            $(document).ready( event => {
+                // start the whole thing up here...
+            });
+        </script>
+    </body>
+</html>

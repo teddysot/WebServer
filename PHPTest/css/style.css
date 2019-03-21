@@ -1,0 +1,135 @@
+/* 
+    (C) Copyright 2019 Teddy Nasahachart
+    studied from Scott Henshaw at VFS
+*/
+
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+body{
+    background: #eee;
+}
+
+.menu{
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.footer{
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Body elements*/
+.article-section{
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    background: rgb(206, 205, 205);
+}
+
+section {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    height: 800px;
+    border: 1px solid red;
+}
+
+section a{
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(56, 56, 56);
+    display: block;
+    padding: 10px;
+}
+
+/* Elements for medias (picture, video, etc.*/
+.media { 
+    min-width: 0;
+    margin: 5px;
+}
+img {
+    margin: 5px;
+    width: 200px;
+    max-width: 100%; 
+    max-height: 450px; 
+}
+
+
+/* For menu */
+nav{
+    background: #333;
+}
+
+nav ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+nav a{
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    padding: 10px;
+}
+
+nav a:hover{
+    background-color: #555;
+}
+
+/* 
+Tutorial from https://www.youtube.com/channel/UCW5YeuERMmlnqo4oq8vwUpg
+Flex box adjust, setting and responsively.
+*/
+a.fb{
+    background: url(../images/fb.png) no-repeat center;
+    background-size: 70%;
+}
+
+a.linkedin{
+    background: url(../images/linkedin.png) no-repeat center;
+    background-size: 100%;
+}
+
+.social a{
+    text-indent: -10000px;
+}
+
+.social{
+    max-width: 80px;
+    margin: 0 auto;
+}
+
+nav ul.social{
+    flex: 1 1 0;
+    display: flex;
+}
+
+nav ul.social li{
+    flex: 1 1 0;
+}
+
+@media screen and (min-width: 768px){
+    
+    nav{
+        display: flex;
+        justify-content: center;
+    }
+    nav ul{
+        border: 1px solid red;
+        display: flex;
+    }
+                
+    nav li{
+        flex: 1 1 0;
+    }
+
+    .social{
+        margin: 0;
+    }
+}

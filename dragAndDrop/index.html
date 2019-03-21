@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript Drag &amp; Drop</title>
+    
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+        <!-- This is the key CDN to pull jQuery from -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+                
+        <!-- Local styles -->       
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                position: absolute;
+            }
+            .draggable {
+                cursor: progress;
+            }
+            .frame {
+                border:1px solid black;
+            }
+            #mouseLoc {
+                position:static;
+                top:0px;
+                left:0px;
+                width:768px;
+            }
+            #editor {
+                width:900px;
+                height:400px;
+                overflow:hidden;
+                left:100px;
+                top:100px;
+                cursor:pointer;
+                
+            }
+            #item1, #item2 {
+                border: 1px solid blue; 
+                background-color: #00f; 
+                color: #fff; 
+                font-weight: bold; 
+                padding: 75px;
+                left: 100px;
+                top: 100px;
+            }
+            #item2 {
+                background-color: #f00;
+                left: 300px;
+            }
+        </style>
+    </head>
+
+    <body>
+    
+        <div id="wrapper">
+            <div id="mouseLoc">[Dynamic mouse location displayed here]</div>
+
+            <div id="editor" class="frame">
+                <div id="item1" class="items" draggable></div>
+                <div id="item2" class="items" draggable="true"></div>
+                
+                <div id="item3" draggable="true"></div>
+                <div id="item4" draggable="true"></div>
+                
+            </div>
+        </div>
+    </body>
+
+    <script type="module" src="scripts/main.js"></script>
+
+</html>
+
