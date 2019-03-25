@@ -8,39 +8,44 @@ export default class App {
         $('#new-level-btn').on('click', event => { });
         $('#save-as-level-btn').on('click', event => { });
         $(".item").each((i, el) => this.dragHandler($(el)));
+		$(".droppedItem").each((i, el) => this.droppedHandler($(el)));
         this.dropHandler($('#editor-wrapper'));
     }
 
     dragHandler($el) {
-        $el.draggable({
-            revert: "invalid",
-            opacity: 0.5,
-            helper: "clone",
-            appendTo: "#editor-wrapper"
-        });
-    }
+			$el.draggable({
+				revert: "invalid",
+				opacity: 0.5,
+				helper: "clone",
+				appendTo: "#editor-wrapper"
+			});
+	}
+	
+	droppedHandler($el) {
+		$el.draggable({
+			opacity: 0.5,
+		});
+	}
 
     dropHandler($el){
         if($el.hasClass("droppedItem")){
-            $el.droppable({
+			$el.droppable({
+				accept: ".droppedItem",
+				hoverClass: "drop-hover",
+			})
+		}
+		else{
+			$el.droppable({
                 accept: ".item",
                 hoverClass: "drop-hover",
-                addClasses: true,
-            })
-        }
-        else{
-            $el.droppable({
-                accept: ".item",
-                hoverClass: "drop-hover",
-                addClasses: true,
                 drop: (event, ui) => {
-                    let dropped = ui.helper.clone();
-                    ui.helper.remove();
-                    dropped.addClass("droppedItem");
+                    let dropped = $(ui.draggable).clone();
+					dropped.draggable();
+					dropped.addClass("droppedItem");
                     $el.append(dropped);
                 }
             });
-        }
+		}
     }
 
     /*
