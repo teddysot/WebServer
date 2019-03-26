@@ -4,48 +4,119 @@
 export default class App {
     constructor() {
         // Initialize everything
-        $('#level-data-form').on('submit', event => this.doSave( event ));
+        
+        // Drag handler for items
+        $(".item").each((i, el) => this.dragHandler(el));
+
+        // Add button
+        $('#add-obstacle-btn').on('click', event => {
+            $('.input-bg-modal').css({
+                display: "flex"
+            });
+        });
+        $('.input-close').on('click', event => {
+            $('.input-bg-modal').css({
+                display: "none"
+            });
+        });
+        $('#add-image-btn').on('click', event => this.addImageBtn(event));
+
+        // Save/Load
+        $('#save-level-btn').on('click', event => {this.doSave(event)});
+        $('#load-level-btn').on('click', event => { this.doLoad(event) });
         $('#new-level-btn').on('click', event => { });
-        $('#save-as-level-btn').on('click', event => { });
-        $(".item").each((i, el) => this.dragHandler($(el)));
-		$(".droppedItem").each((i, el) => this.droppedHandler($(el)));
-        this.dropHandler($('#editor-wrapper'));
+
+        // Test Console Log Button
+        $('#testConsole').on('click', event => {});
     }
 
-    dragHandler($el) {
-			$el.draggable({
-				revert: "invalid",
-				opacity: 0.5,
-				helper: "clone",
-				appendTo: "#editor-wrapper"
-			});
-	}
-	
-	droppedHandler($el) {
-		$el.draggable({
-			opacity: 0.5,
-		});
-	}
+    addImageBtn(el) {
+        // Get all the attribute data
+        let Type = $('#type').val();
+        let Name = $('#name').val();
+        let Height = $('#height').val();
+        let Width = $('#width').val();
+        let Texture = $('#texture').val();
+        let Shape = $('#shape').val();
+        let Friction = $('#friction').val();
+        let Mass = $('#mass').val();
+        let Restitution = $('#restitution').val();
 
-    dropHandler($el){
-        if($el.hasClass("droppedItem")){
-			$el.droppable({
-				accept: ".droppedItem",
-				hoverClass: "drop-hover",
-			})
-		}
-		else{
-			$el.droppable({
+        // Generate html code
+        $('#library-wrapper ul').append(
+            `<div id="addedItem" 
+            class="item"
+            data-type="${Type}"
+            data-name="${Name}"
+            data-height="${Height}"
+            data-width="${Width}"
+            data-texture="${Texture}"
+            data-shape="${Shape}"
+            data-friction="${Friction}"
+            data-mass="${Mass}"
+            data-restitution="${Restitution}"
+            style="background-image: url(${Texture}); width: ${Width}px; height: ${Height}px;" >
+            </div>`
+        );
+        
+        // Add Drag Handler
+        this.dragHandler("#addedItem");
+
+        // Close window
+        $('.input-bg-modal').css({
+            display: "none"
+        });
+    }
+
+    dragHandler(el) {
+        if ($(el).hasClass("droppedItem")) {
+            $(el).draggable();
+
+            // Add dropped item click handler for editing style
+            $('.droppedItem').on('click', event => {
+                $('.edit-bg-modal').css({
+                    display: "flex"
+                });
+            });
+            
+            // Close window handler
+            $('.edit-close').on('click', event => {
+                $('.edit-bg-modal').css({
+                    display: "none"
+                });
+            });
+            this.dropHandler('.item');
+        }
+        else {
+            $(el).draggable({
+                revert: "invalid",
+                opacity: 0.5,
+                helper: "clone",
+                appendTo: "#editor-wrapper"
+            });
+            this.dropHandler('#editor-wrapper');
+        };
+    }
+
+    dropHandler(el) {
+        if ($(el).hasClass("droppedItem")) {
+            $(el).droppable({
+                hoverClass: "drop-hover",
+            })
+        }
+        else {
+            $(el).droppable({
                 accept: ".item",
                 hoverClass: "drop-hover",
                 drop: (event, ui) => {
                     let dropped = $(ui.draggable).clone();
-					dropped.draggable();
-					dropped.addClass("droppedItem");
-                    $el.append(dropped);
+                    dropped.addClass("droppedItem");
+                    $(el).append(dropped);
+                    this.dragHandler(dropped);
+                    ui.helper.remove();
                 }
             });
-		}
+        }
     }
 
     /*
@@ -70,19 +141,19 @@ export default class App {
         $.post('http://pgwm.vfs.local/cle/save/', request)
             .then(dataAsString => {
                 // Register a callback to handle the response
-                let response = $.parseJSON( dataAsString );
+                let response = $.parseJSON(dataAsString);
 
-                if(response.payload.length == 0){
+                if (response.payload.length == 0) {
                     return;
                 }
 
-                if(!response.error){
+                if (!response.error) {
                     return;
                 }
             });
     }
 
-    doLoad( event ) {
+    doLoad(event) {
         event.preventDefault();
         /*
         LOAD
@@ -91,6 +162,15 @@ export default class App {
         @param: datatype='object/level'
         @param: payload=JSONString
         */
+       
+        // Send a request ask for my level
+       $.post('http://pgwm.vfs.local/CLE/get_level_list/', 'pg15teddy')
+       .then(dataAsString => {
+           //console.log(dataAsString);
+           // serialize back the string to an array
+           let response = JSON.parse(dataAsString);
+           console.log(response);
+       })
     }
 
     saveRequest() {
@@ -109,17 +189,19 @@ export default class App {
                 backgroundName: "background"
             }
         */
-       
-       // Add the level data to the params
-       let theLevel = this.levelDataFromLevel( formDataObj );
 
+        // Add the level data to the params
+        let theLevel = this.levelDataFromLevel();
+        
         // Add params for the level to save
         let levelDataToSave = {
             userid: 'pg15teddy',
-            name: 'level-1',
+            name: formDataObj[0].value,
             datatype: 'level',
             payload: theLevel
         };
+
+        //console.log(levelDataToSave);
 
 
         // Send the message to the server and
@@ -127,11 +209,42 @@ export default class App {
         // POST http://pgwm.vfs.local/cle/index.php?action=save&name=pg15teddy&name=level-1&datatype=level&payload=???
         //      BETTER BELOW...
         // POST http://pgwm.vfs.local/cle/save/?name=pg15teddy&name=level-1&datatype=level&payload=???
+        //console.log($.param(levelDataToSave));
 
-        return $.params( levelDataToSave );
+        // $.param for serialize string for a server
+        return $.param(levelDataToSave);
     }
 
+    // Get all the data in the editor-wrapper
     levelDataFromLevel() {
-        return "";
+        let leveldata = [];
+        $("#editor-wrapper").children().each( (i, el) => {
+            let data = {
+                'pos': $(el).position(),
+                'type': $(el).attr("data-type"),
+                'name': $(el).attr("data-name"),
+                'height': $(el).attr("data-height"),
+                'width': $(el).attr("data-width"),
+                'texture': $(el).attr("data-texture"),
+                'shape': $(el).attr("data-shape"),
+                'friction': $(el).attr("data-friction"),
+                'mass': $(el).attr("data-mass"),
+                'restitution': $(el).attr("data-restitution"),
+            }
+            /*
+            Type
+            Name
+            Height
+            Width
+            Texture
+            Shape
+            Friction
+            Mass
+            Restitution
+            */
+           leveldata.push(data);
+        });
+        console.log(leveldata);
+        return leveldata;
     }
 }

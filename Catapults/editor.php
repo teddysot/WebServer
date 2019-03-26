@@ -24,22 +24,51 @@
                         Collidables:    <input type="text" name="collidables" value="" placeholder="10" /><br/>
                         Ammo:           <input type="text" name="ammoCount" value="" placeholder="10" /><br/>
                         Background:     <input type="text" name="backgroundName" value="" placeholder="background" /><br/>
-                        <input type="submit" name="submit" value="Save" class="button"/>
-                        <div id="new-level-btn" class="button">New...</div><br/>
-                        <div id="save-as-level-btn" class="button">Save as...</div>
+                        <div id="save-level-btn" class="button">Save</div>
+                        <div id="load-level-btn" class="button">Load</div><br/>
+                        <div id="new-level-btn" class="button">New...</div>
+                        <div id="testConsole" class="button">TestConsole</div>
                     </form>
                 </div>
 
                 <div id="editor-wrapper" class="flex-center-item box-border">
-                    <div id="edit-window"><?php // programatically generated ?></div>
                 </div>
 
                 <div id="library-wrapper" class="flex-item box-border">
                     <ul>
-                    <div class="item" style="background-image: url(./images/background.png);" ></div>
-                    <div class="item"></div>
                     </ul>
                     <div id="add-obstacle-btn" class="button">Add...</div>
+                </div>
+
+                <!-- https://www.youtube.com/watch?v=gLWIYk0Sd38 -->
+                <div class="input-bg-modal">
+                    <div class="input-modal-contents">
+                        <div class="input-close">+</div>
+                        <form action="">
+                            Type:   <input id="type" type="text" placeholder="ex.image"> <br/> <br/>
+                            Name:   <input id="name" type="text" placeholder="ex.name"> <br/> <br/>
+                            Height:  <input id="height" type="text" placeholder="ex.150px"> <br/> <br/>
+                            Width:  <input id="width" type="text" placeholder="ex.150px"> <br/> <br/>
+                            Texture:    <input id="texture" type="text" placeholder="ex.name.png"> <br/> <br/>
+                            Shape:  <input id="shape" type="text" placeholder="ex.squre"> <br/> <br/>
+                            Friction:   <input id="friction" type="text" placeholder="ex.9.8"> <br/> <br/>
+                            Mass:   <input id="mass" type="text" placeholder="ex.10.0"> <br/> <br/>
+                            Restitution:    <input id="restitution" type="text" placeholder="ex."> <br/> <br/>
+                            <div id="add-image-btn" class="button">Add</div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="edit-bg-modal">
+                    <div class="edit-modal-contents">
+                        <div class="edit-close">+</div>
+                        <form action="">
+                            FileName:   <input id="filenameF" type="text" placeholder="name.png"> <br/> <br/>
+                            Width:  <input id="widthF" type="text" placeholder="150px"> <br/> <br/>
+                            Height:  <input id="heightF" type="text" placeholder="150px"> <br/> <br/>
+                            <div id="add-image-btn" class="button">Add</div>
+                        </form>
+                    </div>
                 </div>
 
             </section>
