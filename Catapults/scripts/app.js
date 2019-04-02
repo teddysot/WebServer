@@ -140,8 +140,14 @@ export default class App {
         let request = this.saveRequest();
         $.post('http://pgwm.vfs.local/cle/save/', request)
             .then(dataAsString => {
+
+                console.log(request);
+                console.log(dataAsString);
+                console.log(JSON.stringify(dataAsString));
                 // Register a callback to handle the response
                 let response = $.parseJSON(dataAsString);
+
+                console.log(response);
 
                 if (response.payload.length == 0) {
                     return;
@@ -197,11 +203,11 @@ export default class App {
         let levelDataToSave = {
             userid: 'pg15teddy',
             name: formDataObj[0].value,
-            datatype: 'level',
+            type: 'level',
             payload: theLevel
         };
 
-        //console.log(levelDataToSave);
+        console.log($.param(levelDataToSave));
 
 
         // Send the message to the server and

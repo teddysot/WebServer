@@ -13,7 +13,7 @@
 
 // Some global stuff we need
 // Shorthand "imports"
-export const Physics = {
+export const physics = {
     Vec2:           Box2D.Common.Math.b2Vec2,
 
     World:          Box2D.Dynamics.b2World,

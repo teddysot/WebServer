@@ -1,0 +1,18 @@
+{
+    "name": "level-1",
+    "obstacles": "10",
+    "cannons": "1",
+    "shots": "15",
+    "background": "my-background",
+    "score-star1": "1000",
+    "score-star2": "10000",
+    "score-star3": "50000",
+    "collidables": [
+        {
+            "top": 345,
+            "left": 345,
+            "height": 100,
+            "width": 100
+        }
+    ]
+}
