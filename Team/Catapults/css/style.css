@@ -1,0 +1,111 @@
+/* Copyright 2019 Scott Henshaw */
+* {
+    --game-area-width: 1280px;
+    --game-area-height: 720px;
+}
+
+.editor {
+    width: var(--game-area-width);
+    height: var(--game-area-height);
+}
+
+.box-border {
+    margin: 2px;
+}
+
+.obstacle {
+    height: 75px;
+    width: 75px;
+}
+
+.item {
+    background-size: 100% 100%;
+    width: 150px; 
+    height: 150px; 
+    padding: 0.5em;
+    cursor: pointer;
+}
+
+.drop-hover {
+    opacity: 0.7;
+}
+
+#editor-wrapper {
+    background-image: url('../images/background.png');
+    background-size: 100% 100%;
+    width: var(--game-area-width);
+    height: auto;
+    overflow: hidden;
+}
+
+.player {
+	background-image: url('../images/vfs_logo.png');
+	background-size: 100% 100%;
+	width: 100px; 
+	height: 100px;
+	top: 70px;
+	left: 15px;
+}
+
+
+.input-bg-modal {
+	background-color: rgba(0, 0, 0, 0.8);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
+
+.input-modal-contents {
+	height: 450px;
+	width: 500px;
+	background-color: white;
+	text-align: center;
+	padding: 20px;
+	position: relative;
+	border-radius: 4px;
+}
+
+.input-close {
+	position: absolute;
+	top: 0;
+	right: 10px;
+	font-size: 42px;
+	color: #333;
+	transform: rotate(45deg);
+	cursor: pointer;
+}
+
+.edit-bg-modal {
+	background-color: rgba(0, 0, 0, 0.8);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
+
+.edit-modal-contents {
+	height: 300px;
+	width: 500px;
+	background-color: white;
+	text-align: center;
+	padding: 20px;
+	position: relative;
+	border-radius: 4px;
+}
+
+.edit-close {
+	position: absolute;
+	top: 0;
+	right: 10px;
+	font-size: 42px;
+	color: #333;
+	transform: rotate(45deg);
+	cursor: pointer;
+}
