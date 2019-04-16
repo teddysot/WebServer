@@ -51,23 +51,10 @@ export default class App {
 
         console.log(object);
 
-
-        object = `<div id="addedItem" 
-        class="item"
-        data-type="${Type}"
-        data-name="${Name}"
-        data-height="${Height}"
-        data-width="${Width}"
-        data-texture="${Texture}"
-        data-shape="${Shape}"
-        data-friction="${Friction}"
-        data-mass="${Mass}"
-        data-restitution="${Restitution}"
-        style="background-image: url(${Texture}); width: ${Width}px; height: ${Height}px;" >
-        </div>`;
+        object.setImage(Type, Name, Height, Width, Texture, Shape, Friction, Mass, Restitution);
 
         // Generate html code
-        $('#library-wrapper ul').append(object);
+        //$('#library-wrapper ul').append(object);
         
         // Add Drag Handler
         this.dragHandler("#addedItem");

@@ -71,6 +71,10 @@ export default class Game {
         this.entity = new Entity(this.world, view, staticBody);
         return this.entity;
     }
+
+    setEntity(Type, Name, Height, Width, Texture, Shape, Friction, Mass, Restitution){
+        this.entity.setImage(Type, Name, Height, Width, Texture, Shape, Friction, Mass, Restitution);
+    }
     
         
     iterate() {
@@ -105,12 +109,14 @@ export default class Game {
         this.frameCount = this.frameCount % 300;
         //Update the app/simulation model
         this.world.update(timeElapsed);
+        this.entity.update(timeElapsed);
     }
 
     
     render( timeElapsed ) {
         // Refresh the view - canvas and dom elements   
         this.world.render(timeElapsed);
+        this.entity.render();
     }
         
 }

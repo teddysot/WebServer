@@ -50,9 +50,27 @@ export default class Entity {
 
     update( opts = undefined ) {
         // Update this object based on supplied position/rotation data
-
+        this.view.css({top: this.model.bodyDefn.position.x, left: this.model.bodyDefn.position.y, position:'relative'});
         //Retrieve positions and rotations from the Box2d world
         
+    }
+
+    setImage(Type, Name, Height, Width, Texture, Shape, Friction, Mass, Restitution){
+        this.view.html = `<div id="addedItem"
+        class="item"
+        data-type="${Type}"
+        data-name="${Name}"
+        data-height="${Height}"
+        data-width="${Width}"
+        data-texture="${Texture}"
+        data-shape="${Shape}"
+        data-friction="${Friction}"
+        data-mass="${Mass}"
+        data-restitution="${Restitution}"
+        style="background-image: url(${Texture}); width: ${Width}px; height: ${Height}px;" >
+        </div>`;
+
+        $('#library-wrapper ul').append(this.view.html);
     }
 
     getModel(){
