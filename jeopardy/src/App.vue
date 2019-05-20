@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <gameshow-about name="Jeopardy"></gameshow-about>
+    <GameHost name="Host"></GameHost>
   </div>
 </template>
 
 <script>
-import GameshowAbout from './components/About.vue'
+import GameHost from './components/Host.vue'
 
 export default {
   name: 'app',
   components: {
-    GameshowAbout
+    GameHost
   },
 }
 </script>
