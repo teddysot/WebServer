@@ -31,6 +31,7 @@ const methods = {
     },
 
     goNow( event ) {
+        //this.$store.player = new Player();
 
     }
 }

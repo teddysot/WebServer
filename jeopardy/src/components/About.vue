@@ -12,11 +12,32 @@
 </template>
 
 <script>
+
 const viewModel = {
     appType: "demo",
     classList: "about half-width"
 }
 
+import Controller from "../mixins/Controller.js"
+
+class AboutController extends Controller
+{
+    constructor( name )
+    {
+        super(name);
+        this.vm = {
+            viewModel
+        };
+    }
+
+    doIt() {
+        console.log("hello world");
+    }
+}
+
+export default new AboutController('GameshowAbout');
+
+/*
 export default {
     name: 'GameshowAbout',
     data: () => {return viewModel},
@@ -26,7 +47,7 @@ export default {
     methods: {},
     computed: {},
     components:{}
-}
+}*/
 </script>
 
 <style>
