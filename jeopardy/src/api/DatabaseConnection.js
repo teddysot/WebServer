@@ -25,24 +25,24 @@ class DatabaseConnection
     }
 
     connect( options = this.options ) {
-        // return new Promise( (resolve, reject) => {
+         return new Promise( (resolve, reject) => {
 
-        //     SQL.createConnection(options)
+            SQL.createConnection(options)
             
-        //     .catch(error => {reject(error)})
-        //     .then( conn => { 
+            .catch(error => {reject(error)})
+            .then( conn => { 
 
-        //         //console.log(`connected to the db @${options.host}`);
-        //         this.connection = conn;
-        //         resolve( conn );  
+                //console.log(`connected to the db @${options.host}`);
+                this.connection = conn;
+                resolve( conn );  
 
-        //     })
+            })
             
-        // })
+        })
     }
 
     disconnect() {
-        //this.connection.end();
+        this.connection.end();
     }
 }
 

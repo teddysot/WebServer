@@ -41,25 +41,25 @@ export default new Vuex.Store({
          *      // update the UI heer
          * })
          */
-        // fetchPlayer(playerId, playerDetails = {})
-        // {
-        //     // We create a new promise. Why? because we want to wait until what?
-        //     return new Promise((resolve, reject) =>{
-        //         //TODO: !!! SCOTT CODE !!! Change URL to server url
-        //        // let url = `/api/player?id=${playerId}`;     // application/x-www-form-urlencoded
-                
-        //         //Axios.get("/api/player").then(data => { return this.store.player = data.payload});
+         fetchPlayer(playerId, playerDetails = {})
+         {
+             // We create a new promise. Why? because we want to wait until what?
+             return new Promise((resolve, reject) =>{
+                 //TODO: !!! SCOTT CODE !!! Change URL to server url
+                 //let url = `/api/player?id=${playerId}`;     // application/x-www-form-urlencoded
+              
+                //Axios.get("/api/player").then(data => { return this.store.player = data.payload});
 
-        //         // We post a request to the server url with the data.
-        //         Axios.post("server/api/player", playerDetails).then(data=> {
-        //             this.store.player = data.payload
-        //             resolve(data);
-        //         })
-        //         .catch(error => {
-        //             reject(error);
-        //         }) 
-        //     });
-        // },
+                 // We post a request to the server url with the data.
+                 Axios.post("server/api/player", playerDetails).then(data=> {
+                     this.store.player = data.payload
+                     resolve(data);
+                 })
+                 .catch(error => {
+                     reject(error);
+                 }) 
+             });
+         },
 
 
 

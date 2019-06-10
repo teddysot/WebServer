@@ -6,11 +6,11 @@ Vue Router
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import HostPage from './routes/Hostpage.vue' // TODO: Not yet made !! IMPORTANT !!
-import LoginPage from './routes/LoginPage.vue' // TODO: Not yet made !! IMPORTANT !!
-import BoardPage from './routes/BoardPage.vue' // TODO: Not yet made !! IMPORTANT !!
-import PlayerPage from './routes/PlayerPage.vue' // TODO: Not yet made !! IMPORTANT !!
-import AdminPage from './routes/AdminPage.vue' // TODO: Not yet made !! IMPORTANT !!
+import HostPage from './routers/HostPage.vue' // TODO: Not yet made !! IMPORTANT !!
+import LoginPage from './routers/LoginPage.vue' // TODO: Not yet made !! IMPORTANT !!
+import BoardPage from './routers/BoardPage.vue' // TODO: Not yet made !! IMPORTANT !!
+import PlayerPage from './routers/PlayerPage.vue' // TODO: Not yet made !! IMPORTANT !!
+import AdminPage from './routers/AdminPage.vue' // TODO: Not yet made !! IMPORTANT !!
 
 Vue.use(Router);
 
