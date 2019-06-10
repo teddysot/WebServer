@@ -15,9 +15,11 @@
 </template>
 
 <script>
+import Store from '../mixins/Store.js';
+
 const viewModel = {
     value: 100,
-    question: "What's the deal with airlines food?",
+    question: "hello world!",
 }
 
 const methods = {

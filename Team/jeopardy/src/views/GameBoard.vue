@@ -5,6 +5,9 @@
 
 <template>
     <div class="board-wrapper">
+        <div v-on:click="goNow" class="debug-item">
+            {{ qa.question }}
+        </div>
         <div class="rows" v-for="index in questionCount" v-bind:key="index">
                 <question-item class="flex-item"></question-item>
             <div class="columns"  v-for="index in categoryCount" v-bind:key="index">
@@ -21,7 +24,9 @@ const viewModel = {
     questionCount:5,
     categoryCount:5,
     categoryList: ['A', 'B', 'C', 'D', 'E', 'F'],
-    qa: {}
+    qa: {
+        question: "temp",
+    }
 }
 
 const methods = {
@@ -31,7 +36,8 @@ const methods = {
     },
 
     goNow( event ) {
-
+        this.$store.dispatch("GetQuestion");
+        this.qa.question = this.$store.state.board.question;
     }
 }
 export default {
@@ -54,6 +60,14 @@ export default {
     padding: 5px;
     background: rgba(255,202,79,255);
     border-radius: 5px;
+}
+
+.debug-item
+{
+    display: flex;
+    width: 200px;
+    height: 300px;
+    background: #000000;
 }
 
 .rows {

@@ -1,5 +1,8 @@
 <template>
   <div id="app" class="flex-container">
+    <div>
+      
+    </div>
     <div class="flex-grow">
       <!--insert timer-->
     </div>
@@ -22,7 +25,6 @@
     <div class="flex-grow">
       <!--insert timer-->
     </div>
-    <!--GameHost name="Host"></GameHost-->
   </div>
 </template>
 
@@ -32,7 +34,6 @@ import PlayerList from './views/PlayerList.vue'
 import GameBoard from './views/QuestionBoard.vue'
 import QuestionTimer from './views/QuestionTimer.vue'
 import ListItem from './views/ListItem.vue'
-import GameHost from './components/Host.vue'
 
 export default {
   name: 'app',
@@ -41,8 +42,7 @@ export default {
     PlayerList,
     GameBoard,
     QuestionTimer,
-    ListItem,
-    GameHost
+    ListItem
   }
 }
 </script>
