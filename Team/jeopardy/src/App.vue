@@ -6,7 +6,7 @@
     <div class="flex-grow">
       <!--insert timer-->
     </div>
-    <div class="conback flex-itemflex-container ">
+    <div class="conback flex-item flex-container ">
       <div class="flex-item">
         <player-list></player-list>
       </div>
@@ -34,6 +34,15 @@ import PlayerList from './views/PlayerList.vue'
 import GameBoard from './views/QuestionBoard.vue'
 import QuestionTimer from './views/QuestionTimer.vue'
 import ListItem from './views/ListItem.vue'
+import { setInterval } from 'timers';
+
+// TODO: Link methods to export default.
+const methods = {
+
+  // run(){
+  //   this.mainLoop = setInterval(() => { this.$store.dispatch('updateSession'); }, UPDATE_FREQ);
+  // },
+}
 
 export default {
   name: 'app',
@@ -75,6 +84,11 @@ export default {
 .flex-grow
 {
   flex: 2 1 auto;
+}
+
+.flex-wrap
+{
+  flex-wrap: wrap;
 }
 
 </style>

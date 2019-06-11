@@ -14,13 +14,17 @@ class UsersTable {
         return new Promise((resolve, reject) => {
 
             // connect to the db
-
-            // // do some query
-             DB.query('INSERT INTO `User_Accounts` values (1, Scott, )', fields, values )
-            //     .then(...)
-            // // disconnect
-
-            // resolve/respond
+            DB.connect().then(conn => {
+                //do some query
+                conn.query(`INSERT INTO user_accounts(User_Name) values ('${data}')`)
+                .then((results, error, fields) => {
+                    if (error) return reject(error);
+                    resolve(results);
+                });
+            })
+            .catch(error => {reject(error)});
+            // disconnect
+            DB.disconnect();
 
         });
 
@@ -30,42 +34,41 @@ class UsersTable {
 
         return new Promise((resolve, reject) => {
             // connect to the db
-
-            console.log("promise-test");
-
             DB.connect()
             .then(conn => {
-                
                 // do some query
-
-                console.log("test");
-                
                 conn.query(`SELECT User_Name from user_accounts where User_ID=${id}`)
-                
+
                 .then((results, error, fields) => {
                     // resolve/respond
-                    console.log("query promise ")
                     if (error) return reject(error);
                     resolve(results);
                 });
             })
             .catch(error => { reject(error); });
-            // disconnect
             DB.disconnect();
         });
 
     }
 
-    readByNickname(nickname) {
+    // readByNickname(nickname) {
+    //     return new Promise((resolve, reject) => {
+    //         // connect to the db
+    //         DB.connect()
+    //         .then(conn => {
+    //             // do some query
+    //             conn.query(`SELECT User_Name from user_accounts where User_ID=${id}`)
 
-        return new Promise((resolve, reject) => {
-            // connect to the db
-            // do some query
-            // disconnect
-            // resolve/respond
-        });
-
-    }
+    //             .then((results, error, fields) => {
+    //                 // resolve/respond
+    //                 if (error) return reject(error);
+    //                 resolve(results);
+    //             });
+    //         })
+    //         .catch(error => { reject(error); });
+    //         DB.disconnect();
+    //     });
+    // }
 
     update(data) {
         // db.query( `UPDATE users SET nickname = '%${data.nickname}%' , '%${data.email}%' WHERE id=${data.id}`)

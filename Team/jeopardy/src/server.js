@@ -23,22 +23,44 @@ const port = process.env.Port || 3000;
 
 // ======================Post APIs============================
 
+App.post('/api/createuser', (request, response) => {
+    let userTable = new UsersTable();
 
-App.post('/api/question', (request, response) => {
-
-    // Not create yet !!
-    let questionTable = new QuestionTable();
-    let question = {
-        payload: "Question"
+    let payload = {
+        exitcode: 0,
+        name: request.body.name,
     }
 
-    questionTable.readById(1)
-        .then(results => {
-            question.payload = `${results[0].question}`;
-            response.json(question);
-        })
-        .catch(error => {console.log(error)});
+    userTable.create(payload.name).then(results => {
+        payload.exitcode = 0;
+        response.json(payload);
+    }).catch(error=>{payload.exitcode = 1});
 });
+
+App.post('/api/questionbyserver', (request, response) => {
+    let question = {
+        payload: "Scott Henshaw!",
+    }
+
+    response.json(question);
+});
+
+// App.post('/api/question', (request, response) => {
+
+//     //TODO: Make Question Table Not create yet !!
+//     let questionTable = new QuestionTable();
+
+//     let question = {
+//         payload: "Question"
+//     }
+
+//     questionTable.readById(1)
+//         .then(results => {
+//             question.payload = `${results[0].question}`;
+//             response.json(question);
+//         })
+//         .catch(error => {console.log(error)});
+// });
 
 App.post('/api/getusername', (request, response) => {
 

@@ -7,6 +7,7 @@ Vue State Store VUEX for Quizshow
 
 'use strict';
 // ! TODO ! for local host connect to axios via //localhost:3000
+const SERVER_ADDRESS = '//localhost:3000';
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
@@ -18,7 +19,8 @@ export default new Vuex.Store({
     state: {
             // =========== Board Local Storage ===========
         board: {
-            question: "What's Scott's Name?",
+            question: "Scotty!!",
+            user: "",
         },
             // =========== Player Local Storage ===========
         player: {
@@ -44,21 +46,41 @@ export default new Vuex.Store({
 
         // =========== Board Storage Actions ===========
 
-        GetQuestion()
+        CreateUser({ commit }, name)
+        {
+            return new Promise((resolve, reject) => {
+                Axios.post(`${SERVER_ADDRESS}/api/createuser`, name).then(data =>{
+                    resolve(data);
+                }).catch(error => {reject(error)});
+            });
+        },
+
+        GetQuestionByStore()
+        {
+            return this.state.board.question;
+        },
+        
+        GetQuestionByServer()
+        {
+            return new Promise ((resolve, reject) => {
+                Axios.post(`${SERVER_ADDRESS}/api/questionbyserver`).then(data => {
+                    this.state.board.question = data.data.payload;
+                    resolve(data);
+                }).catch(error => {reject(error)});
+            });
+        },
+
+        GetQuestionByDatabase()
         {
             // eslint-disable-next-line no-console
-            console.log("Test");
             return new Promise((resolve, reject) => {
-                Axios.post('//localhost:3000/api/question').then(data => {
-                    console.log("Resolved");
+                Axios.post(`${SERVER_ADDRESS}/api/getusername`).then(data => {
                     this.state.board.question = data.data.payload;
                     resolve(data);
                 })
                 .catch(error => {
-                    console.log("Error SQL");
                     reject(error)});
             });
-            //return this.state.board.question;
         }
         
         // =========== Host Storage Actions ===========
