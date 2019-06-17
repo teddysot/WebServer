@@ -3,17 +3,20 @@
     <div class="header">Jeopardy Host</div>
     <div class="body">
       <div class="left-panel">
-        <div class="question">Question</div>
-        <div class="answer">Answer</div>
+        <div class="questionSection">
+          <question-item></question-item>
+        </div>
         <div class="option">
-          <div class="correct">Correct</div>
-          <div class="wrong">Wrong</div>
+          <div @click="debug();" class="correct">Correct</div>
+          <div @click="debug();" class="wrong">Wrong</div>
         </div>
       </div>
       <div class="right-panel">
         <div class="timer">Timer</div>
         <div class="player-score">
-          <div class="player-list">Player</div>
+          <div class="player-list">
+            <player-list></player-list>
+          </div>
         </div>
       </div>
     </div>
@@ -21,6 +24,10 @@
 </template>
 
 <script>
+
+import PlayerList from "./PlayerList.vue"
+import QuestionItem from "./QuestionItem.vue"
+
 const viewModel = {
   appType: "Host"
 };
@@ -33,9 +40,17 @@ export default {
   props: {
     name: String
   },
-  methods: {},
+  methods: {
+    debug()
+    {
+      console.log("gg")
+    }
+  },
   computed: {},
-  components: {}
+  components: {
+    PlayerList,
+    QuestionItem
+  }
 };
 </script>
 
@@ -80,19 +95,11 @@ export default {
   margin-left: 0.5%;
 }
 
-.question {
+.questionSection {
   background-color: rgb(0, 77, 153);
   width: 96%;
   height: 50%;
   margin-top: 2%;
-  margin-left: 2%;
-  margin-bottom: 2%;
-}
-
-.answer {
-  background-color: rgb(0, 77, 153);
-  width: 96%;
-  height: 30%;
   margin-left: 2%;
   margin-bottom: 2%;
 }

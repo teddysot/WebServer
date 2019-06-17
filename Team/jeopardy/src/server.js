@@ -23,44 +23,49 @@ const port = process.env.Port || 3000;
 
 // ======================Post APIs============================
 
-App.post('/api/createuser', (request, response) => {
-    let userTable = new UsersTable();
+// Call this api on login.
+/**
+ * returns ->
+ * 
+ *  payload = 
+ * 
+    * {
+    *      exitcode: 0 for success 1 for error.
+    * 
+    *      role: role of the user (int)      404 = error | 0 = board | 1 = player | 2 = host
+    *      id:   id of the user. (int)       404 = error | < or > 404 = user id
+    *      name: name of the user. (string) "404"= error | "<name>" 
+    * }
+ */
 
+App.post('/api/evalplayer', (request, response) => {
+    
+    let userTable = new UsersTable();   // Create the db bridge
+
+    // Assemble the payload to be used
     let payload = {
+
         exitcode: 0,
+
+        role: request.body.role,
+        id: request.body.id,
         name: request.body.name,
+
     }
 
-    userTable.create(payload.name).then(results => {
+    // Check if the player exists first
+
+
+    userTable.readByNickname(payload.name).then(results => {
+        
         payload.exitcode = 0;
+        payload.id = results[0].User_Id
+        payload.name = results[0].User_Name
+
         response.json(payload);
+        
     }).catch(error=>{payload.exitcode = 1});
 });
-
-App.post('/api/questionbyserver', (request, response) => {
-    let question = {
-        payload: "Scott Henshaw!",
-    }
-
-    response.json(question);
-});
-
-// App.post('/api/question', (request, response) => {
-
-//     //TODO: Make Question Table Not create yet !!
-//     let questionTable = new QuestionTable();
-
-//     let question = {
-//         payload: "Question"
-//     }
-
-//     questionTable.readById(1)
-//         .then(results => {
-//             question.payload = `${results[0].question}`;
-//             response.json(question);
-//         })
-//         .catch(error => {console.log(error)});
-// });
 
 App.post('/api/getusername', (request, response) => {
 
@@ -85,19 +90,17 @@ App.listen(port, () => {
     console.log(`Server running on port ${port}`);
 })
 
+    // ===================== TEMPLATES =======================
 
-/**
- *     // do something with an AJAX request to this edge
-    //let playerId = request.params.id;
-    // fetch stuff from the database.
-    // UsersTable.readById( playerId )
-    // .then( theUser=> {
-    //     response.json(theUser);
-    // })
-    /*.catch( error => {
-        // couldn't find by id, go create one...
-        UsersTable.create()
-        .then(data => {
+    // Basic server call
 
-        })
-    })*/
+    // App.post('/api/<apiurl>', (request, response) => {
+    //     let payload = {
+    //      <payload details>
+    //     }
+    
+ 
+    //      response.json(payload);
+    // });
+
+    // Player tempalate

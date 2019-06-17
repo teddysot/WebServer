@@ -1,10 +1,14 @@
 <template>
   <div id="app" class="flex-container">
-    <div>
-      
+    <div class = "flex-item"></div>
+    <login-view class = "flex-grow"></login-view>
+    <div class = "flex-item"></div>  
+  </div>
+</template>
+
+   <!-- <div>
     </div>
     <div class="flex-grow">
-      <!--insert timer-->
     </div>
     <div class="conback flex-item flex-container ">
       <div class="flex-item">
@@ -23,18 +27,17 @@
       </div>
     </div>
     <div class="flex-grow">
-      <!--insert timer-->
-    </div>
-  </div>
-</template>
+    </div> -->
 
 <script>
+
 import GameshowBoard from './views/GameBoard.vue'
 import PlayerList from './views/PlayerList.vue'
 import GameBoard from './views/QuestionBoard.vue'
 import QuestionTimer from './views/QuestionTimer.vue'
 import ListItem from './views/ListItem.vue'
-import { setInterval } from 'timers';
+import { setInterval } from 'timers'
+import LoginView from './views/Login.vue'
 
 // TODO: Link methods to export default.
 const methods = {
@@ -51,12 +54,16 @@ export default {
     PlayerList,
     GameBoard,
     QuestionTimer,
-    ListItem
+    ListItem,
+    LoginView
   }
 }
 </script>
 
 <style>
+body{
+  background: #4571c4;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -64,6 +71,12 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.window-size
+{
+  width: 700px;
+  height: 650px;
 }
 
 .conback 
@@ -89,6 +102,18 @@ export default {
 .flex-wrap
 {
   flex-wrap: wrap;
+}
+
+.button-base
+{
+  background: rgba(232,72,97,255);
+  border: outset rgba(177, 168, 255, 255) 1px;
+  border-radius: 5px;
+}
+
+.flex-column
+{
+  flex-direction: column;
 }
 
 </style>

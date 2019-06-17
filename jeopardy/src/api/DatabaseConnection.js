@@ -16,29 +16,28 @@ class DatabaseConnection
         this.connection = null
         this.options= {
 
-            host:     'localhost', // pgwm.vfs.local
-            user:     'root',
+            host:     'pgwm.vfs.local', // pgwm.vfs.local
+            user:     'quizshow',
             password: '',
-            database: 'quizshow'
+            database: 'quizshow_jeopardy'
 
         }
     }
 
     connect( options = this.options ) {
-         return new Promise( (resolve, reject) => {
+        return new Promise( (resolve, reject) => {
 
             SQL.createConnection(options)
-            
+
             .catch(error => {reject(error)})
+
             .then( conn => { 
 
-                //console.log(`connected to the db @${options.host}`);
+                console.log(`connected to the db @${options.host}`);
                 this.connection = conn;
-                resolve( conn );  
-
-            })
-            
-        })
+                resolve(conn);
+            });
+        });
     }
 
     disconnect() {

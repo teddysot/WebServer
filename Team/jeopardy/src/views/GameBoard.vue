@@ -50,21 +50,21 @@ const methods = {
         console.log("enter pressed")
     },
 
-    GetByStore( event ) {
-        this.$store.dispatch("GetQuestionByStore");
-    },
+    // GetByStore( event ) {
+    //     this.$store.dispatch("GetQuestionByStore");
+    // },
 
-    GetByServer( event ) {
-        this.$store.dispatch("GetQuestionByServer");        
-    },
+    // GetByServer( event ) {
+    //     this.$store.dispatch("GetQuestionByServer");        
+    // },
 
-    GetByDatabase( event ) {
-        this.$store.dispatch("GetQuestionByDatabase");        
-    },
-    SubmitData(event)
-    {
-        this.$store.dispatch("CreateUser", {name: viewModel.qa.question});
-    }
+    // GetByDatabase( event ) {
+    //     this.$store.dispatch("GetQuestionByDatabase");        
+    // },
+    // SubmitData(event)
+    // {
+    //     this.$store.dispatch("CreateUser", {name: viewModel.qa.question});
+    // }
 }
 
 export default {

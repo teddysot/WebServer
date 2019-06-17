@@ -7,7 +7,7 @@ MySQL Table Accessor for the Users TAble for Quizshow
 'use strict';
 const DB = require('./DatabaseConnection.js') ;
 
-class UsersTable {
+class QuestionsTable {
 
     create(data) {
 
@@ -21,10 +21,10 @@ class UsersTable {
                     if (error) return reject(error);
                     resolve(results);
                 });
+                DB.disconnect();
             })
             .catch(error => {reject(error)});
             // disconnect
-            DB.disconnect();
 
         });
 
@@ -37,38 +37,19 @@ class UsersTable {
             DB.connect()
             .then(conn => {
                 // do some query
-                conn.query(`SELECT User_Name from user_accounts where User_ID=${id}`)
+                conn.query(`SELECT * from questions where Question_ID=${id}`)
 
                 .then((results, error, fields) => {
                     // resolve/respond
                     if (error) return reject(error);
                     resolve(results);
                 });
+                DB.disconnect();
             })
             .catch(error => { reject(error); });
-            DB.disconnect();
         });
 
     }
-
-    // readByNickname(nickname) {
-    //     return new Promise((resolve, reject) => {
-    //         // connect to the db
-    //         DB.connect()
-    //         .then(conn => {
-    //             // do some query
-    //             conn.query(`SELECT User_Name from user_accounts where User_ID=${id}`)
-
-    //             .then((results, error, fields) => {
-    //                 // resolve/respond
-    //                 if (error) return reject(error);
-    //                 resolve(results);
-    //             });
-    //         })
-    //         .catch(error => { reject(error); });
-    //         DB.disconnect();
-    //     });
-    // }
 
     update(data) {
         // db.query( `UPDATE users SET nickname = '%${data.nickname}%' , '%${data.email}%' WHERE id=${data.id}`)
@@ -78,4 +59,4 @@ class UsersTable {
     delete(id) { }
 }
 
-module.exports = UsersTable;
+module.exports = QuestionsTable;

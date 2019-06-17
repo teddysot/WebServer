@@ -4,56 +4,74 @@
 -->
 
 <template>
-    <div class="question-item-wrapper flex-container">
-        <div v-show="false" class = "flex-item text question">
-            {{ question }}
-        </div>
-        <div class = "flex-item text">
-            ${{ value }}
-        </div>        
-    </div>
+  <div @click="GetQuestion()" class="question-item-wrapper flex-container">
+    <div class="flex-item text question">Question<br>{{ CQuestion }}</div>
+    <div class="flex-item text value">Value<br> {{ CValue }}</div>
+    <div class="flex-item text answer">Answer<br>{{ CAnswer }}</div>
+  </div>
 </template>
 
 <script>
-import Store from '../mixins/Store.js';
+import Store from "../mixins/Store.js";
 
 const viewModel = {
-    value: 100,
-    question: Store.GetQuestion(1),
-}
+  id: 1
+};
 
 const methods = {
-
-}
+  GetQuestion(event) {
+    this.$store.dispatch("GetQuestion", { id: viewModel.id });
+  }
+};
 
 export default {
-    name: "question-item",
-    data: ()=>{ return viewModel },
-    props: {},
-    methods,
-    computed: {},
-    components:{}
-}
+  name: "question-item",
+  data: () => {
+    return viewModel;
+  },
+  props: {},
+  methods,
+  computed: {
+    CQuestion() {
+      return this.$store.state.global.question.title;
+    },
+
+    CAnswer() {
+      return this.$store.state.global.question.answer;
+    },
+
+    CValue() {
+      return this.$store.state.global.question.value;
+    }
+  },
+  components: {}
+};
 </script>
 
 <style scoped>
-
 .question-item-wrapper {
-    margin: 5px;
-    background: rgba(255,232,155,255);
-    border-radius: 10px;
-    width: 64px;
-    height: 64px;
-    justify-items: center;
+  margin: 5px;
+  border-radius: 10px;
+  height: 96%;
+  justify-items: center;
+  flex-direction: column;
 }
 
-.question-item-wrapper:hover {
-    background: rgba(255,242,165,255);
+.question {
+  background-color: aliceblue;
+  margin-bottom: 1%;
+}
+
+.value {
+  background-color: aliceblue;
+  margin-bottom: 1%;
 }
 
 .text {
-    margin-top:35px;
-    font-size: 25px;
+  font-size: 25px;
 }
 
+.answer {
+  background-color: aliceblue;
+}
 </style>

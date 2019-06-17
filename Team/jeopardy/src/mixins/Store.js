@@ -24,7 +24,9 @@ export default new Vuex.Store({
         },
             // =========== Player Local Storage ===========
         player: {
-
+            role: 404,
+            id: 404,
+            name: "404",
         },
             // =========== Host Local Storage ===========
         host: {
@@ -37,6 +39,19 @@ export default new Vuex.Store({
     },
     mutations: {
 
+        //TODO: !! WARNING !! parameters might be messed up.
+        initializePlayer(state , payload = 
+            {
+                role:404,
+                id:404,
+                name:"404"
+            })
+        {
+            state.player.role = payload.role;
+            state.player.id = payload.id;
+            state.player.name= payload.name;
+        }
+
     },
     actions: {
 
@@ -44,44 +59,47 @@ export default new Vuex.Store({
 
         // =========== Player Storage Actions ===========
 
+        // Called at the start when you login.
+        EvaluatePlayer({ commit }, name)
+        {
+            return new Promise((resolve, reject) => {
+                Axios.post(`${SERVER_ADDRESS}/api/evalplayer`, name).then(data =>{
+                    commit('initializePlayer', data);
+                    resolve(data);
+                }).catch(error => {reject(error)});
+            });
+        },
+
         // =========== Board Storage Actions ===========
 
-        CreateUser({ commit }, name)
-        {
-            return new Promise((resolve, reject) => {
-                Axios.post(`${SERVER_ADDRESS}/api/createuser`, name).then(data =>{
-                    resolve(data);
-                }).catch(error => {reject(error)});
-            });
-        },
 
-        GetQuestionByStore()
-        {
-            return this.state.board.question;
-        },
+        // GetQuestionByStore()
+        // {
+        //     return this.state.board.question;
+        // },
         
-        GetQuestionByServer()
-        {
-            return new Promise ((resolve, reject) => {
-                Axios.post(`${SERVER_ADDRESS}/api/questionbyserver`).then(data => {
-                    this.state.board.question = data.data.payload;
-                    resolve(data);
-                }).catch(error => {reject(error)});
-            });
-        },
+        // GetQuestionByServer()
+        // {
+        //     return new Promise ((resolve, reject) => {
+        //         Axios.post(`${SERVER_ADDRESS}/api/questionbyserver`).then(data => {
+        //             this.state.board.question = data.data.payload;
+        //             resolve(data);
+        //         }).catch(error => {reject(error)});
+        //     });
+        // },
 
-        GetQuestionByDatabase()
-        {
-            // eslint-disable-next-line no-console
-            return new Promise((resolve, reject) => {
-                Axios.post(`${SERVER_ADDRESS}/api/getusername`).then(data => {
-                    this.state.board.question = data.data.payload;
-                    resolve(data);
-                })
-                .catch(error => {
-                    reject(error)});
-            });
-        }
+        // GetQuestionByDatabase()
+        // {
+        //     // eslint-disable-next-line no-console
+        //     return new Promise((resolve, reject) => {
+        //         Axios.post(`${SERVER_ADDRESS}/api/getusername`).then(data => {
+        //             this.state.board.question = data.data.payload;
+        //             resolve(data);
+        //         })
+        //         .catch(error => {
+        //             reject(error)});
+        //     });
+        // }
         
         // =========== Host Storage Actions ===========
 

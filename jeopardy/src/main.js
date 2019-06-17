@@ -7,7 +7,7 @@ Vue State Store VUEX for Quizshow
 'use strict';
 
 import Vue from 'vue'
-import Store from './mixins/Controller.js'
+import store from './mixins/Store.js'
 import Router from './router.js'
 import App from './App.vue'
 //TODO: Import router here
@@ -18,7 +18,7 @@ class JeopardyGame {
   constructor()
   {
     this.view = new Vue({
-        store: Store,
+        store: store,
         router: Router,
         render: h => h(App),
       }).$mount('#app')
