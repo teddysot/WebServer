@@ -19,8 +19,8 @@ export default new Vuex.Store({
     state: {
             // =========== Board Local Storage ===========
         board: {
-            question: "Scotty!!",
-            user: "",
+            loadboard: false,
+
         },
             // =========== Player Local Storage ===========
         player: {
@@ -34,28 +34,113 @@ export default new Vuex.Store({
         },
             //  =========== Global Storage Actions ===========
         global: {
-
+            question:[],
+            bundle: {
+                count: 1,
+                categoryList: [],
+                categoryName: []
+            },
         }
+    },
+    getters:
+    {
+        
     },
     mutations: {
 
         //TODO: !! WARNING !! parameters might be messed up.
-        initializePlayer(state , payload = 
-            {
-                role:404,
-                id:404,
-                name:"404"
-            })
+        initializePlayer(state , payload)
         {
             state.player.role = payload.role;
             state.player.id = payload.id;
-            state.player.name= payload.name;
+            state.player.name = payload.name;
+        },
+
+        updateRole(state , role)
+        {
+            state.player.role = role;
+        },
+
+        updateQuestions(state, questions)
+        {
+            state.global.question = questions.data;
         }
+
 
     },
     actions: {
 
         //  =========== Global Storage Actions ===========
+
+        UpdateUserRole({ commit }, role)
+        {
+            let payload = 
+            {
+                roleid: role,
+                id: this.state.player.id
+            }
+
+            return new Promise((resolve, reject) => {
+                Axios.post(`${SERVER_ADDRESS}/api/updaterole`, payload).then(data =>{
+                    commit('updateRole', data.data.roleid);
+                    resolve(data);
+                }).catch(error => {reject(error)});
+            });
+        },
+
+        CreateGameSession({commit}, bundle) {
+            return new Promise((resolve, reject) => {
+                Axios.post(`${SERVER_ADDRESS}/api/creategame`, bundle).then(data => {
+                    resolve(data);
+                }).catch(error => { reject(error) });
+            });
+        },
+
+        GetBundleList() {
+            return new Promise((resolve, reject) => {
+                Axios.post(`${SERVER_ADDRESS}/api/bundlelist`).then(data => {
+                    this.state.global.bundle.count = data.data.count;
+                    resolve(data);
+                }).catch(error => { reject(error) });
+            });
+        },
+
+        GetCategoryList({ commit }, id) {
+            return new Promise((resolve, reject) => {
+                Axios.post(`${SERVER_ADDRESS}/api/categorylist`, id).then(data => {
+                    this.state.global.bundle.categoryList = data.data.categoryList;
+                    resolve(data);
+                }).catch(error => { reject(error) });
+            });
+        },
+
+        GetCategory({ commit }, id) {
+            return new Promise((resolve, reject) => {
+                Axios.post(`${SERVER_ADDRESS}/api/category`, id).then(data => {
+                    this.state.global.bundle.categoryName[id.id - 1] = data.data;
+                    resolve(data);
+                }).catch(error => { reject(error) });
+            });
+        },
+
+        GetQuestionByCategory({commit}, id)
+        {
+            return new Promise((resolve, reject) => {
+                let payload = []
+                let counter = 0;
+                let arrayCounter = 0;
+
+                for(counter = 0; counter < this.state.global.question.length; counter++)
+                {
+                    if(this.state.global.question[counter].Category_ID == id)
+                    {
+                        payload[arrayCounter] =  this.state.global.question[counter];
+                        arrayCounter++;
+                    }
+                }
+                resolve(payload);
+            });
+        },
 
         // =========== Player Storage Actions ===========
 
@@ -64,7 +149,7 @@ export default new Vuex.Store({
         {
             return new Promise((resolve, reject) => {
                 Axios.post(`${SERVER_ADDRESS}/api/evalplayer`, name).then(data =>{
-                    commit('initializePlayer', data);
+                    commit('initializePlayer', data.data);
                     resolve(data);
                 }).catch(error => {reject(error)});
             });
@@ -72,63 +157,17 @@ export default new Vuex.Store({
 
         // =========== Board Storage Actions ===========
 
-
-        // GetQuestionByStore()
-        // {
-        //     return this.state.board.question;
-        // },
-        
-        // GetQuestionByServer()
-        // {
-        //     return new Promise ((resolve, reject) => {
-        //         Axios.post(`${SERVER_ADDRESS}/api/questionbyserver`).then(data => {
-        //             this.state.board.question = data.data.payload;
-        //             resolve(data);
-        //         }).catch(error => {reject(error)});
-        //     });
-        // },
-
-        // GetQuestionByDatabase()
-        // {
-        //     // eslint-disable-next-line no-console
-        //     return new Promise((resolve, reject) => {
-        //         Axios.post(`${SERVER_ADDRESS}/api/getusername`).then(data => {
-        //             this.state.board.question = data.data.payload;
-        //             resolve(data);
-        //         })
-        //         .catch(error => {
-        //             reject(error)});
-        //     });
-        // }
+        GetQuestions({commit})
+        {
+            return new Promise((resolve, reject) => {
+                Axios.post(`${SERVER_ADDRESS}/api/getquestions`).then(data =>{
+                    commit("updateQuestions", data.data);
+                    this.state.board.loadboard = true;
+                }).catch(error => {reject(error)});
+            });
+        },
         
         // =========== Host Storage Actions ===========
 
     }
 });
-
-
-
-/**
-         * To call this...
-         * 
-         * this.$tore.fetchPlayer(32, details)
-         * .then(() => {
-         *      // update the UI heer
-         * })
-        
-        // fetchPlayer(playerId, playerDetails = {})
-        // {
-        //     // We create a new promise. Why? because we want to wait until what?
-        //     return new Promise((resolve, reject) =>{
-
-        //         // We post a request to the server url with the data.
-        //         Axios.post("server/api/player", playerDetails).then(data=> {
-        //             this.store.player = data.payload
-        //             resolve(data);
-        //         })
-        //         .catch(error => {
-        //             reject(error);
-        //         }) 
-        //     });
-        // },
- */

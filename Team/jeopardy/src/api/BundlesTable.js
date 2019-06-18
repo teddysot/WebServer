@@ -7,7 +7,7 @@ MySQL Table Accessor for the Users TAble for Quizshow
 'use strict';
 const DB = require('./DatabaseConnection.js') ;
 
-class QuestionsTable {
+class BundlesTable {
 
     create(data) {
 
@@ -30,14 +30,14 @@ class QuestionsTable {
 
     }
 
-    readByQuestionId(id) {
+    getAllBundles() {
 
         return new Promise((resolve, reject) => {
             // connect to the db
             DB.connect()
             .then(conn => {
                 // do some query
-                conn.query(`SELECT * from questions where Question_ID=${id}`)
+                conn.query(`SELECT * from bundles`)
 
                 .then((results, error, fields) => {
                     // resolve/respond
@@ -48,46 +48,7 @@ class QuestionsTable {
             })
             .catch(error => { reject(error); });
         });
-    }
 
-    readAllQuestions()
-    {
-        return new Promise((resolve, reject) => {
-            // connect to the db
-            DB.connect()
-            .then(conn => {
-                // do some query
-                conn.query(`SELECT * from questions`)
-
-                .then((results, error, fields) => {
-                    // resolve/respond
-                    if (error) return reject(error);
-                    resolve(results);
-                });
-                DB.disconnect();
-            })
-            .catch(error => { reject(error); });
-        });
-    }
-
-    readByCategoryId(id) {
-
-        return new Promise((resolve, reject) => {
-            // connect to the db
-            DB.connect()
-            .then(conn => {
-                // do some query
-                conn.query(`SELECT * from questions where Category_ID=${id}`)
-
-                .then((results, error, fields) => {
-                    // resolve/respond
-                    if (error) return reject(error);
-                    resolve(results);
-                });
-                DB.disconnect();
-            })
-            .catch(error => { reject(error); });
-        });
     }
 
     update(data) {
@@ -98,4 +59,4 @@ class QuestionsTable {
     delete(id) { }
 }
 
-module.exports = QuestionsTable;
+module.exports = BundlesTable;

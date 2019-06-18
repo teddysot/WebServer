@@ -4,13 +4,17 @@
 -->
 
 <template>
-    <div class="question-item-wrapper flex-container">
-        <div v-show="false" class = "flex-item text question">
-            {{ question }}
+    <div class="question-item-wrapper item flex-container">
+        <div class = "flex-item"></div>
+        <div class = "flex-grow flex-container">
+            <div v-show="false" class = "flex-item text question">
+                {{ questionID }}
+            </div>
+            <div class = "flex-item text">
+                ${{ questions[questionID].Value }}
+            </div>
         </div>
-        <div class = "flex-item text">
-            ${{ value }}
-        </div>        
+        <div class="flex-item"></div>    
     </div>
 </template>
 
@@ -20,19 +24,33 @@ import Store from '../mixins/Store.js';
 const viewModel = {
     value: 100,
     question: "hello world!",
+    questions: [],
 }
 
 const methods = {
-
+    GetQuestions()
+    {
+       this.$store.dispatch("GetQuestionByCategory", this.categoryID).then(data =>
+       {
+           viewModel.questions = data;
+       });
+    }
 }
 
 export default {
     name: "question-item",
     data: ()=>{ return viewModel },
-    props: {},
+    props: {
+        questionID: Number,
+        categoryID: Number
+    },
     methods,
     computed: {},
-    components:{}
+    components:{},
+    created: function ()
+    {
+        this.GetQuestions();
+    }
 }
 </script>
 
@@ -54,6 +72,11 @@ export default {
 .text {
     margin-top:35px;
     font-size: 25px;
+}
+
+.item
+{
+    flex:0 0 0;
 }
 
 </style>

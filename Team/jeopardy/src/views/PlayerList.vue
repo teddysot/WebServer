@@ -8,8 +8,14 @@
         <div class="flex-item">
             Players
         </div>
-        <div class="player-item-container flex-item" v-for="index in playerCount" v-bind:key="index">
-            <list-item></list-item>
+        <div class="flex-container flex-item flex-row">
+            <div class ="flex-grow"></div>
+            <div class ="flex-grow">
+                <div class="player-item-container flex-item" v-for="index in playerCount" v-bind:key="index">
+                    <list-item></list-item>
+                </div>
+            </div>
+            <div class ="flex-grow"></div>
         </div>
     </div>
 </template>

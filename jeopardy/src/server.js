@@ -14,6 +14,7 @@ const UsersTable = require('./api/UsersTable.js');
 const QuestionsTable = require('./api/QuestionsTable.js')
 const BundlesTable = require('./api/BundlesTable.js')
 const CategoriesTable = require('./api/CategoriesTable.js')
+const GamesTable = require('./api/GamesTable.js');
 const App = Express();
 
 App.use(Express.static('public'));
@@ -36,6 +37,14 @@ App.post('/api/createuser', (request, response) => {
     userTable.create(payload.name).then(results => {
         payload.exitcode = 0;
         response.json(payload);
+    }).catch(error => { payload.exitcode = 1 });
+});
+
+App.post('/api/creategame', (request, response) => {
+    let gameTable = new GamesTable();
+
+    gameTable.create(request.body.bundle).then(results => {
+        response.json(results);
     }).catch(error => { payload.exitcode = 1 });
 });
 

@@ -4,38 +4,54 @@
 -->
 
 <template>
-    <div class="board-wrapper">
-        <div class = "columns flex-container">
-        <div>{{ text }} </div>
-        <div class="flex-item">
-            <input v-model="qa.question" placeholder="place name in me">
-            <div v-on:click="SubmitData" class="debug-item"> 
-                create new prof
-            </div>
-            <div v-on:click="GetByStore" class="debug-item"> 
-                Store
-            </div>
-            <div v-on:click="GetByServer" class="item1"> 
-                Server
-            </div>
-            <div v-on:click="GetByDatabase" class=" item2"> 
-                Database
+    <div class="board-wrapper window-size flex-container flex-row flex-grow">
+        
+        <div class="item">
+            <!--Timer here-->
+        </div>
+
+        <div class="flex-grow flex-container">
+            <!-- Questions -->
+            <div class="board" v-if="shouldLoad">
+                <div class="rows" v-for="index in questionCount" v-bind:key="index">
+                    <div class = "flex-item"></div>
+                        <question-item :categoryID ="index" :questionID="base" class="flex-item"></question-item>
+                    <div class="columns"  v-for="index2 in categoryCount" v-bind:key="index2">
+                    <div class = "flex-item"></div>
+                        <question-item :categoryID="index" :questionID="index2 - 1" class="flex-item"></question-item>
+                    <div class = "flex-item"></div>
+                    </div>
+                    <div class = "flex-item"></div>
+                </div>
+
+                <!-- <div class="flex-container flex-column">
+                    <div class="flex-item"></div>
+
+                    <div class="flex-grow">
+                        <div class="question"> {{qa.question}} </div>
+                    </div>
+
+                    <div class="flex-item"> 
+                        <div> TEST </div>                        
+                    </div>
+                </div> -->
             </div>
         </div>
+
+        <div class="item players-bg">
+            <!-- Insert Player List here -->
+            <player-list></player-list>
         </div>
-        <div class="rows" v-for="index in questionCount" v-bind:key="index">
-                <question-item class="flex-item"></question-item>
-            <div class="columns"  v-for="index in categoryCount" v-bind:key="index">
-                <question-item class="flex-item"></question-item>
-            </div>
-        </div>
+
     </div>
 </template>
 
 <script>
 import QuestionItem from './QuestionItem.vue'
+import PlayerList from './PlayerList'
 
 const viewModel = {
+    base: 0,
     questionCount:5,
     categoryCount:5,
     categoryList: ['A', 'B', 'C', 'D', 'E', 'F'],
@@ -49,22 +65,10 @@ const methods = {
     {
         console.log("enter pressed")
     },
-
-    // GetByStore( event ) {
-    //     this.$store.dispatch("GetQuestionByStore");
-    // },
-
-    // GetByServer( event ) {
-    //     this.$store.dispatch("GetQuestionByServer");        
-    // },
-
-    // GetByDatabase( event ) {
-    //     this.$store.dispatch("GetQuestionByDatabase");        
-    // },
-    // SubmitData(event)
-    // {
-    //     this.$store.dispatch("CreateUser", {name: viewModel.qa.question});
-    // }
+    GetQuestionDetails()
+    {
+        this.$store.dispatch("GetQuestions");
+    }
 }
 
 export default {
@@ -73,13 +77,17 @@ export default {
     props: {},
     methods,
     computed: {
-        text()
+        shouldLoad()
         {
-            return this.$store.state.board.question;
+            return this.$store.state.board.loadboard;
         }
     },
     components:{
         QuestionItem,
+        PlayerList
+    },
+    mounted: function () {
+        this.GetQuestionDetails()
     }
 }
 </script>
@@ -87,38 +95,8 @@ export default {
 <style scoped>
 
 .board-wrapper {
-    width: auto;
-    height: auto;
-    padding: 5px;
     background: rgba(255,202,79,255);
     border-radius: 5px;
-}
-
-.debug-item
-{
-    display: flex;
-    width: 100px;
-    height: 100px;
-    background: #000000;
-    color: white;
-}
-
-.item1
-{
-    width: 100px;
-    height: 100px;
-    background: #004525;
-    color: white;
-
-}
-
-.item2
-{
-    width: 100px;
-    height: 100px;
-    background: #F34412;
-    color: white;
-
 }
 
 .border-lock {
@@ -133,6 +111,32 @@ export default {
 .columns {
     display: flex;
     flex-direction: column;
+}
+
+.board
+{
+    background: #dd922f;
+    padding-top: 7%;
+    margin: 5px;
+    flex: 6 1 0;
+    border-radius: 5px;
+}
+
+.question
+{
+    font-size: 60px;
+}
+
+.item
+{
+    flex: 1 1 0;
+    margin: 5px;
+}
+
+.players-bg
+{
+    background: #dd922f;
+    border-radius: 20px;
 }
 
 </style>

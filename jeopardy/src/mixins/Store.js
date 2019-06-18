@@ -34,7 +34,8 @@ export default new Vuex.Store({
         global: {
             bundle: {
                 count: 1,
-                categoryList: [0, 1, 2, 3, 4]
+                categoryList: [],
+                categoryName: []
             },
             question: {
                 id: 1,
@@ -63,6 +64,14 @@ export default new Vuex.Store({
             });
         },
 
+        CreateGameSession({commit}, bundle) {
+            return new Promise((resolve, reject) => {
+                Axios.post(`${SERVER_ADDRESS}/api/creategame`, bundle).then(data => {
+                    resolve(data);
+                }).catch(error => { reject(error) });
+            });
+        },
+
         GetBundleList() {
             return new Promise((resolve, reject) => {
                 Axios.post(`${SERVER_ADDRESS}/api/bundlelist`).then(data => {
@@ -84,8 +93,7 @@ export default new Vuex.Store({
         GetCategory({ commit }, id) {
             return new Promise((resolve, reject) => {
                 Axios.post(`${SERVER_ADDRESS}/api/category`, id).then(data => {
-                    this.state.global.bundle.categoryList[id] = data.data;
-                    console.log(data.data);
+                    this.state.global.bundle.categoryName[id.id - 1] = data.data;
                     resolve(data);
                 }).catch(error => { reject(error) });
             });

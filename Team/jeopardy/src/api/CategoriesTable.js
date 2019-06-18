@@ -7,7 +7,7 @@ MySQL Table Accessor for the Users TAble for Quizshow
 'use strict';
 const DB = require('./DatabaseConnection.js');
 
-class UsersTable {
+class CategoriesTable {
 
     create(data) {
 
@@ -16,85 +16,55 @@ class UsersTable {
             // connect to the db
             DB.connect().then(conn => {
                 //do some query
-
                 conn.query(`INSERT INTO user_accounts(User_Name) values ('${data}')`)
                     .then((results, error, fields) => {
                         if (error) return reject(error);
                         resolve(results);
                     });
-                 // disconnect
                 DB.disconnect();
-
-            }).catch(error => { reject(error) });
-  
+            })
+                .catch(error => { reject(error) });
+            // disconnect
 
         });
 
     }
 
-    updateUserRole(roleid, id)
-    {
+    getCategoryList(id) {
         return new Promise((resolve, reject) => {
             // connect to the db
             DB.connect()
                 .then(conn => {
                     // do some query
-                    conn.query(`UPDATE user_accounts SET Role_ID=${roleid} where User_ID=${id}`)
+                    conn.query(`SELECT * from category_bundles where Bundle_ID=${id}`)
 
                         .then((results, error, fields) => {
                             // resolve/respond
                             if (error) return reject(error);
                             resolve(results);
                         });
-
-                        DB.disconnect();
-
-                }).catch(error => { reject(error); });
+                    DB.disconnect();
+                })
+                .catch(error => { reject(error); });
         });
-
     }
 
-    readById(id) {
-
+    getCategory(id) {
         return new Promise((resolve, reject) => {
             // connect to the db
             DB.connect()
                 .then(conn => {
                     // do some query
-                    conn.query(`SELECT User_Name from user_accounts where User_ID=${id}`)
+                    conn.query(`SELECT * from categories where Category_ID=${id}`)
 
                         .then((results, error, fields) => {
                             // resolve/respond
                             if (error) return reject(error);
                             resolve(results);
                         });
-
-                        DB.disconnect();
-
-                }).catch(error => { reject(error); });
-        });
-
-    }
-
-    readByNickname(nickname) {
-        return new Promise((resolve, reject) => {
-            // connect to the db
-            DB.connect()
-                .then(conn => {
-                    // do some query
-                    conn.query(`SELECT * FROM user_accounts WHERE User_Name="${nickname}"`)
-
-                        .then((results, error, fields) => {
-
-                            // resolve/respond
-                            if (error) return reject(error);
-                            resolve(results);
-
-                        });
-
-                        DB.disconnect();
-
-                }).catch(error => { reject(error); });
+                    DB.disconnect();
+                })
+                .catch(error => { reject(error); });
         });
     }
 
@@ -106,4 +76,4 @@ class UsersTable {
     delete(id) { }
 }
 
-module.exports = UsersTable;
+module.exports = CategoriesTable;

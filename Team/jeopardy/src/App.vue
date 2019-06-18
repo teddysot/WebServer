@@ -1,33 +1,16 @@
 <template>
   <div id="app" class="flex-container">
-    <div class = "flex-item"></div>
+    <!-- <div class = "flex-item"></div>
     <login-view class = "flex-grow"></login-view>
-    <div class = "flex-item"></div>  
+    <div class = "flex-item"></div>   -->
+    
+    <div class="flex-item"></div>
+    <gameshow-board></gameshow-board>
+    <div class="flex-item"></div>
   </div>
 </template>
 
-   <!-- <div>
-    </div>
-    <div class="flex-grow">
-    </div>
-    <div class="conback flex-item flex-container ">
-      <div class="flex-item">
-        <player-list></player-list>
-      </div>
-      <div class="conback flex-grow flex-container ">
-        <gameshow-board></gameshow-board>
-        <section v-show="false">
-          <div class="flex-item">
-          </div>
-          <div class="flex-item">
-          </div>
-          <div class="flex-item">
-          </div>
-        </section>
-      </div>
-    </div>
-    <div class="flex-grow">
-    </div> -->
+
 
 <script>
 

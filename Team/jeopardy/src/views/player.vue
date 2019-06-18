@@ -13,8 +13,9 @@
         </div>
         </header>
         <h3> {{playername}} has: {{score}}$</h3> <!--communicates with host board on how much money player has-->
-        <div class = "timer"> <div>timer</div>  </div> <!--timer-->
-        <button @click = didit></button>
+        <div class = "timer"> <div>timer</div>  </div> <!---timer-->
+        <button></button>
+        <!--@click = didit(on the line above)-->
         
     </div>
 </template>
@@ -26,7 +27,7 @@
 //import things we need here
 
 const viewModel = {
-    playername: 'player',
+    //playername: 'player',
    score: 400,
    show: false,
 }
@@ -43,10 +44,17 @@ const viewModel = {
 
                 Works()
                 {
+                    this.$store.dispatch("GetPlayer");
                     viewModel.show = !viewModel.show;
                 },
           },
           components: {},
+          computed:{
+              playername()
+              {
+                  return this.$store.state.player.name;
+              }
+          },
     }
 </script>
 <style>
