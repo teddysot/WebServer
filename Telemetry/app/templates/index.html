@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include 'partials/head.html' %}
+
+    </head>
+    <body>
+        <h2>VFS AppEngine Template</h2>
+        
+        Template says: {{msg}}
+        
+        <section id="main-area">
+	        <div id="working-area">
+	        
+	           {{ current_panel|safe }}
+	           
+	        </div>
+        </section>
+       
+        <script src="scripts/app.js"></script>
+    </body>
+</html>

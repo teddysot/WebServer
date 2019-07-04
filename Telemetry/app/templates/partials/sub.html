@@ -1,0 +1,14 @@
+<!-- Template componet for sub page within home page -->
+<div id="sub-panel">
+
+    <form id="sub-submit" name="Create Persona">
+        Player Name: <input type="text" name="PlayerName" value={{ player_name }} />
+        Persona Name: <input type="text" name="PersonaName" value={{ persona_name }} />
+        <input type="submit" value="Add" />
+        <input type="hidden" name="cmd" value="add_user" />
+    </form>
+
+    <div id='status'></div>
+    
+</div>
+<script id="editor_js" src="scripts/sub_editor.js"></script>
