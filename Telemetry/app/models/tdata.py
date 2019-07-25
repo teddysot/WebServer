@@ -13,7 +13,3 @@ class TelemetryData( ndb.Model ):
     x = ndb.FloatProperty()
     y = ndb.FloatProperty()
     action = ndb.IntegerProperty()
-    
-    
-    
-    

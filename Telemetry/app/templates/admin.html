@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include 'partials/head.html' %}
+    <style>
+        .edit-form-layout {
+            border: 1px solid black;
+            padding: 3px;
+            margin: 3px
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>VFS AppEngine Template</h2>
+    <h3>{{subtitle}}</h3>
+    <section id="main-area">
+        <div id="working-area">
+            <!-- TODO: Put the form here -->
+            <div class="edit-form-layout">
+                <form id="telemetry-edit" min-width="40cm">
+                    Session: <input type="text" name="session" value="" placeholder="1" />
+                    Action : <input type="text" name="gameaction" value="" />
+                    <input type="submit" value="Save" />
+                    <input type="hidden" name="cmd" value="saveRecord" />
+                </form>
+            </div>
+
+            <!-- TODO: Put the list of tRecords here -->
+            <div class="edit-form-layout">
+                {% for rec in rec_list %}
+                    {{ rec }}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <script type="module" src="scripts/admin.js"></script>
+</body>
+
+</html>
